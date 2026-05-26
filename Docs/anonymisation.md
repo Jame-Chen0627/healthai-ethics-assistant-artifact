@@ -1,6 +1,6 @@
 # Anonymisation Notes
 
-This artifact package is prepared for double-blind review.
+This artifact package is prepared for single-blind review.
 
 ## Removed Or Excluded
 

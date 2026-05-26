@@ -2,7 +2,7 @@
 
 **Paper:** AI Ethics to Requirements Practice: Building and Evaluating the HealthAI Ethics Assistant
 
-**Artifact type:** Anonymous replication package for double-blind review
+**Artifact type:** Replication package for single-blind review
 
 This package contains the implementation, structured knowledge base, prompt
 templates, setup instructions, and anonymised evaluation materials for the
