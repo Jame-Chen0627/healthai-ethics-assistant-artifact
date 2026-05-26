@@ -8,16 +8,19 @@ responses are excluded from the artifact package.
 
 Responses used a 1-5 Likert scale.
 
-1. The assistant was useful for creating ethics-related software requirements.
-2. The assistant made the requirements-engineering task easier.
-3. The assistant improved the clarity of ethical requirements.
-4. The assistant helped identify privacy concerns.
-5. The assistant helped identify safety concerns.
-6. The assistant helped identify bias/fairness concerns.
-7. The assistant helped identify transparency concerns.
-8. The assistant helped identify accountability concerns.
-9. The Create-Validate-Compare workflow was easy to understand.
-10. Traceable references increased trust in the assistant's outputs.
+1. Easy to use and navigate.
+2. Easy to learn without training.
+3. Negative item excluded from the paper table and discussed qualitatively.
+4. Accept/reject generated requirements was intuitive.
+5. Improves compliance drafting.
+6. Relevant and useful information.
+7. Five-dimensional indicator useful.
+8. Mixed persona produced useful output.
+9. Negative item excluded from the paper table and discussed qualitatively.
+10. Traceable references increased trust.
+11. Transparent in why it generated output.
+12. Negative item excluded from the paper table and discussed qualitatively.
+13. Negative item excluded from the paper table and discussed qualitatively.
 
 ## System Usability Scale Items
 
@@ -39,7 +42,3 @@ Responses used the standard 1-5 SUS scale.
 - SUS total score: 60.
 - Highest TAM item: Q10, "Traceable references increased trust in the
   assistant's outputs", mean score 5.
-
-Before uploading the anonymous artifact, replace placeholder TAM means in
-`anonymised_results.csv` with the final anonymised aggregate values used in the
-paper.

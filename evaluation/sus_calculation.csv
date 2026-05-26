@@ -1,13 +1,15 @@
-item,response_mean,adjusted_score_rule,adjusted_score
-SUS1,3,odd item: response - 1,2
-SUS2,3,even item: 5 - response,2
-SUS3,3,odd item: response - 1,2
-SUS4,3,even item: 5 - response,2
-SUS5,3,odd item: response - 1,2
-SUS6,3,even item: 5 - response,2
-SUS7,3,odd item: response - 1,2
-SUS8,3,even item: 5 - response,2
-SUS9,3,odd item: response - 1,2
-SUS10,3,even item: 5 - response,2
-SUM,,,20
+item,response,adjusted_score_rule,adjusted_score
+SUS1,not_released,odd item: response - 1,0
+SUS2,not_released,even item: 5 - response,4
+SUS3,not_released,odd item: response - 1,4
+SUS4,not_released,even item: 5 - response,not_specified_in_text
+SUS5,not_released,odd item: response - 1,3
+SUS6,not_released,even item: 5 - response,3
+SUS7,not_released,odd item: response - 1,4
+SUS8,not_released,even item: 5 - response,not_specified_in_text
+SUS9,not_released,odd item: response - 1,0
+SUS10,not_released,even item: 5 - response,not_specified_in_text
+KNOWN_ITEM_SCORE_SUM,,,18
+UNSPECIFIED_ITEM_SCORE_SUM_REQUIRED_FOR_TOTAL,,,6
+ADJUSTED_SCORE_SUM,,,24
 SUS_TOTAL,,,60

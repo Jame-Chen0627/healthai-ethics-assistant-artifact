@@ -1,12 +1,15 @@
 metric,item,mean_score,notes
-TAM,Q1 usefulness,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q2 ease of task,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q3 requirement clarity,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q4 privacy concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q5 safety concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q6 bias concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q7 transparency concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q8 accountability concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q9 workflow understandability,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
-TAM,Q10 traceable references increased trust,5.0,reported highest TAM item
+TAM,Q1 easy to use and navigate,3,reported in Table 2
+TAM,Q2 easy to learn without training,4,reported in Table 2
+TAM,Q3 negative item,not_reported_in_table,excluded from Table 2 and discussed qualitatively
+TAM,Q4 accept/reject generated requirements intuitive,3,reported in Table 2
+TAM,Q5 improves compliance drafting,3,reported in Table 2
+TAM,Q6 relevant and useful information,3,reported in Table 2
+TAM,Q7 five-dimensional indicator useful,3,reported in Table 2
+TAM,Q8 mixed persona produced useful output,3,reported in Table 2
+TAM,Q9 negative item,not_reported_in_table,excluded from Table 2 and discussed qualitatively
+TAM,Q10 traceable references increased trust,5,reported in Table 2; highest-rated item
+TAM,Q11 transparent in why it generated output,3,reported in Table 2
+TAM,Q12 negative item,not_reported_in_table,excluded from Table 2 and discussed qualitatively
+TAM,Q13 negative item,not_reported_in_table,excluded from Table 2 and discussed qualitatively
 SUS,total_score,60.0,reported SUS score
