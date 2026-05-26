@@ -1,0 +1,112 @@
+[
+  {
+    "id": "eu-ai-act-art-9",
+    "framework": "EU AI Act",
+    "article": "Art. 9",
+    "title": "Risk Management System",
+    "summary": "High-risk AI providers must establish, implement, document, and maintain a continuous risk management system across the AI lifecycle.",
+    "detail": "Use this reference when a requirement should cover systematic risk identification, analysis, mitigation, residual-risk evaluation, and monitoring after deployment. For a healthcare AI system, it supports requirements for documented risk controls, review cycles, and post-market feedback loops.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["safety", "accountability"]
+  },
+  {
+    "id": "eu-ai-act-art-10",
+    "framework": "EU AI Act",
+    "article": "Art. 10",
+    "title": "Data Governance",
+    "summary": "Training, validation, and testing datasets for high-risk AI must meet quality criteria, including representativeness and bias examination.",
+    "detail": "Use this reference when a requirement concerns dataset quality, provenance, preparation, relevance, representativeness, error detection, bias examination, and appropriate data governance practices. In healthcare AI, it is especially relevant to patient cohorts, demographic coverage, labelling quality, missing data, and privacy-aware data handling.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["privacy", "bias"]
+  },
+  {
+    "id": "eu-ai-act-art-12",
+    "framework": "EU AI Act",
+    "article": "Art. 12",
+    "title": "Record-keeping (Logging)",
+    "summary": "High-risk AI systems must automatically log events to ensure traceability of operation and post-market monitoring.",
+    "detail": "Use this reference when a requirement needs audit trails, event logging, traceability, monitoring evidence, or reviewable operational records. For clinical systems, it supports recording access, model output events, human overrides, timestamps, and system state needed for investigation.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["accountability", "transparency", "privacy"]
+  },
+  {
+    "id": "eu-ai-act-art-13",
+    "framework": "EU AI Act",
+    "article": "Art. 13",
+    "title": "Transparency and Information to Users",
+    "summary": "Users must be provided with clear, intelligible instructions on AI capabilities, limitations, and intended purpose.",
+    "detail": "Use this reference when a requirement should describe intended use, operating conditions, known limitations, expected accuracy, user instructions, and interpretation guidance. For healthcare professionals, it supports clear communication of what the AI can and cannot safely support.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["transparency"]
+  },
+  {
+    "id": "eu-ai-act-art-14",
+    "framework": "EU AI Act",
+    "article": "Art. 14",
+    "title": "Human Oversight",
+    "summary": "High-risk AI must allow effective human oversight to prevent or minimise risks to health, safety, or fundamental rights.",
+    "detail": "Use this reference when a requirement needs human review, override, escalation, monitoring, or safe intervention. In clinical workflows, it supports keeping clinicians in control of consequential decisions and making AI recommendations contestable.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["safety", "accountability"]
+  },
+  {
+    "id": "eu-ai-act-art-15",
+    "framework": "EU AI Act",
+    "article": "Art. 15",
+    "title": "Accuracy, Robustness and Cybersecurity",
+    "summary": "High-risk AI must reach an appropriate level of accuracy, robustness, and cybersecurity throughout its lifecycle.",
+    "detail": "Use this reference when a requirement covers accuracy targets, robustness testing, resilience to errors, cybersecurity controls, degradation handling, or ongoing performance monitoring. For healthcare AI, it supports validation under realistic clinical conditions and safeguards against unsafe model drift.",
+    "source_label": "EU AI Act Regulation (EU) 2024/1689",
+    "source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "applies_to": ["safety", "bias"]
+  },
+  {
+    "id": "nist-govern-1-5",
+    "framework": "NIST AI RMF",
+    "article": "GOVERN 1.5",
+    "title": "Ongoing Monitoring & Review Policies",
+    "summary": "Organisational policies require ongoing monitoring and periodic review of AI risks, including data retention and accountability mechanisms.",
+    "detail": "Use this reference when a requirement needs governance ownership, review cadence, accountability policies, risk monitoring, escalation paths, or lifecycle maintenance. It is useful for turning one-off technical controls into sustained organizational practice.",
+    "source_label": "NIST AI RMF 1.0",
+    "source_url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "applies_to": ["accountability", "privacy"]
+  },
+  {
+    "id": "nist-map-1-5",
+    "framework": "NIST AI RMF",
+    "article": "MAP 1.5",
+    "title": "Mission & Context Documentation",
+    "summary": "AI risks are mapped to system mission, context of use, and stakeholders, including documentation of data sources and known limitations.",
+    "detail": "Use this reference when a requirement should connect the AI system to its intended purpose, deployment context, stakeholders, data sources, assumptions, and limitations. In healthcare AI, it helps ensure requirements are grounded in the actual clinical setting rather than a generic model description.",
+    "source_label": "NIST AI RMF 1.0",
+    "source_url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "applies_to": ["privacy", "transparency"]
+  },
+  {
+    "id": "nist-measure-2-3",
+    "framework": "NIST AI RMF",
+    "article": "MEASURE 2.3",
+    "title": "AI System Performance & Validity",
+    "summary": "AI system performance is measured and demonstrated against representative deployment conditions and stakeholder needs.",
+    "detail": "Use this reference when a requirement should specify validation metrics, test conditions, representative datasets, performance thresholds, and evidence that the system works for the intended users and setting. It supports clinical validation, monitoring, and re-evaluation after changes.",
+    "source_label": "NIST AI RMF 1.0",
+    "source_url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "applies_to": ["safety", "bias"]
+  },
+  {
+    "id": "nist-measure-2-11",
+    "framework": "NIST AI RMF",
+    "article": "MEASURE 2.11",
+    "title": "Fairness & Bias Evaluation",
+    "summary": "Fairness and bias of AI outputs are evaluated, documented, and communicated, including across demographic subgroups.",
+    "detail": "Use this reference when a requirement should include subgroup analysis, fairness metrics, bias testing, documentation of findings, communication of limitations, and mitigation follow-up. For healthcare AI, it supports checking whether model behavior differs across patient populations.",
+    "source_label": "NIST AI RMF 1.0",
+    "source_url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "applies_to": ["bias"]
+  }
+]

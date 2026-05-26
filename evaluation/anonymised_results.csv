@@ -1,0 +1,12 @@
+metric,item,mean_score,notes
+TAM,Q1 usefulness,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q2 ease of task,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q3 requirement clarity,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q4 privacy concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q5 safety concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q6 bias concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q7 transparency concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q8 accountability concern support,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q9 workflow understandability,REPLACE_WITH_ANONYMISED_MEAN,replace before uploading artifact
+TAM,Q10 traceable references increased trust,5.0,reported highest TAM item
+SUS,total_score,60.0,reported SUS score

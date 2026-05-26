@@ -1,0 +1,98 @@
+[
+  {
+    "id": "int-hcp-privacy-1",
+    "source": "interview",
+    "stakeholder": "HCP",
+    "dimension": "privacy",
+    "quote": "In Chinese hospitals, patients' data is strictly governed. No doctors or nurses are allowed to export sensitive data outside the hospital.",
+    "implication": "Patient data must remain within the hospital network; on-premise hosting and export controls should be requirements."
+  },
+  {
+    "id": "int-hcp-safety-1",
+    "source": "interview",
+    "stakeholder": "HCP",
+    "dimension": "safety",
+    "quote": "For imported machines and bots, the database should be based locally.",
+    "implication": "Data containment: AI inference and storage must be co-located with the clinical site."
+  },
+  {
+    "id": "int-hcp-accountability-1",
+    "source": "interview",
+    "stakeholder": "HCP",
+    "dimension": "accountability",
+    "quote": "Doctors will be held responsible for any mistakes made by medical bots, as they must review outputs before using them.",
+    "implication": "Require explicit clinician sign-off and audit logs before AI outputs reach the patient."
+  },
+  {
+    "id": "int-hcp-transparency-1",
+    "source": "interview",
+    "stakeholder": "HCP",
+    "dimension": "transparency",
+    "quote": "We don't really care about the running logic behind AI bots, doctors don't have time to dig deeper.",
+    "implication": "Explanations must be lightweight and decision-relevant; full model explainability is a low priority for clinicians."
+  },
+  {
+    "id": "int-seng-safety-1",
+    "source": "interview",
+    "stakeholder": "SEng",
+    "dimension": "safety",
+    "quote": "You cannot take any output from these tools verbatim, you always need to sanity check, validate and verify.",
+    "implication": "Require mandatory verification gates and human-in-the-loop checks around LLM outputs."
+  },
+  {
+    "id": "int-hcr-safety-1",
+    "source": "interview",
+    "stakeholder": "HCR",
+    "dimension": "safety",
+    "quote": "The large model tried to 'fill in the gaps' and ended up generating fabricated data...increased the complexity of our manual review process.",
+    "implication": "Detect and flag fabricated content; provenance tracking on every AI-generated artefact."
+  },
+  {
+    "id": "reddit-hcp-accountability-1",
+    "source": "reddit",
+    "stakeholder": "HCP",
+    "dimension": "accountability",
+    "quote": "Supposing there are 2 or 3 big AI models that are used across the country, that company has to bear the malpractice debt for whole country... I can see malpractice lawyers building class action lawsuits for all the people whose cancer was missed by the AI.",
+    "implication": "Clarify liability allocation between vendor, deploying institution, and clinician before deployment; record decisions for audit."
+  },
+  {
+    "id": "reddit-seng-safety-1",
+    "source": "reddit",
+    "stakeholder": "SEng",
+    "dimension": "safety",
+    "quote": "If an ML tool is 90% accurate, physicians will say it's clearly not ready. Yet they'll leave out that maybe physicians are only right 70% of the time... Physicians will tell you they've never made a mistake, and patients will tell you otherwise.",
+    "implication": "Document and disclose AI accuracy alongside the human baseline used for comparison; avoid asymmetric evaluation."
+  },
+  {
+    "id": "reddit-hcr-bias-1",
+    "source": "reddit",
+    "stakeholder": "HCR",
+    "dimension": "bias",
+    "quote": "Let's say that an MRI scanner manufactured by GE is used in a memory clinic while one manufactured by Siemens is used in an ICU. So an algorithm would associate differences in manufacturers with neurodegenerative qualities and the presence of injury.",
+    "implication": "Audit for site/equipment-driven shortcuts; stratify validation across scanner brands and clinical sites."
+  },
+  {
+    "id": "reddit-hcp-privacy-1",
+    "source": "reddit",
+    "stakeholder": "HCP",
+    "dimension": "privacy",
+    "quote": "Image files contain hidden patient identifiers (DICOM headers, burned-in pixel text).",
+    "implication": "Strip metadata and run pixel-level de-identification before any image leaves the clinical environment."
+  },
+  {
+    "id": "reddit-seng-transparency-1",
+    "source": "reddit",
+    "stakeholder": "SEng",
+    "dimension": "transparency",
+    "quote": "Clinicians won't trust a black-box prediction, but they don't want a 50-line SHAP explanation either — they want a one-line 'why'.",
+    "implication": "Provide concise, decision-relevant rationales rather than raw feature attributions."
+  },
+  {
+    "id": "reddit-hcr-accountability-1",
+    "source": "reddit",
+    "stakeholder": "HCR",
+    "dimension": "accountability",
+    "quote": "Without versioned model snapshots and input logs we literally cannot reproduce why a patient got that score six months later.",
+    "implication": "Mandate versioned model artefacts and append-only request/response logs for every inference."
+  }
+]

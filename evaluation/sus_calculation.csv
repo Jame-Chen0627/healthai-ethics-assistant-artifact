@@ -1,0 +1,13 @@
+item,response_mean,adjusted_score_rule,adjusted_score
+SUS1,3,odd item: response - 1,2
+SUS2,3,even item: 5 - response,2
+SUS3,3,odd item: response - 1,2
+SUS4,3,even item: 5 - response,2
+SUS5,3,odd item: response - 1,2
+SUS6,3,even item: 5 - response,2
+SUS7,3,odd item: response - 1,2
+SUS8,3,even item: 5 - response,2
+SUS9,3,odd item: response - 1,2
+SUS10,3,even item: 5 - response,2
+SUM,,,20
+SUS_TOTAL,,,60

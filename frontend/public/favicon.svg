@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0969da"/>
+      <stop offset="1" stop-color="#1a7f37"/>
+    </linearGradient>
+  </defs>
+  <!-- shield -->
+  <path
+    d="M32 4 L56 12 V30 C56 44 46 54 32 60 C18 54 8 44 8 30 V12 Z"
+    fill="url(#g)"
+  />
+  <!-- inner highlight -->
+  <path
+    d="M32 9 L51 15 V30 C51 41 43 49.5 32 54.5 C21 49.5 13 41 13 30 V15 Z"
+    fill="rgba(255,255,255,0.10)"
+  />
+  <!-- medical cross -->
+  <path
+    d="M28 18 H36 V26 H44 V34 H36 V46 H28 V34 H20 V26 H28 Z"
+    fill="#ffffff"
+  />
+</svg>
