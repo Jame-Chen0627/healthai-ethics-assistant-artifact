@@ -1,72 +1,108 @@
-# HealthAI Ethics Assistant Artifact
+# Replication Package: HealthAI Ethics Assistant
 
-> Anonymous replication package for double-blind review.
+**Paper:** AI Ethics to Requirements Practice: Building and Evaluating the HealthAI Ethics Assistant
 
-**HealthAI Ethics Assistant** helps users create, validate, compare, curate and
-export requirements for healthcare AI ethics. The current application domain is
-**HealthAI Ethics**, grounded in a curated knowledge base of EU AI Act articles,
-NIST AI RMF controls and practitioner findings across privacy, safety, bias,
-transparency and accountability.
+**Artifact type:** Anonymous replication package for double-blind review
 
-The application now supports mixed user personas, per-chat context, clickable
-regulation references, per-chat requirement preferences, and Word document
-export for accepted requirements. Adaptive topics are kept as a future extension
-rather than exposed in the current HealthAI-focused UI.
-
-Reviewer-facing artifact materials are provided in:
-
-- `knowledge_base/`: EU AI Act, NIST AI RMF and practitioner findings in JSON.
-- `prompts/`: Create, Validate and Compare prompt templates.
-- `Docs/artifact_description.md`: package overview and workflow traceability.
-- `Docs/anonymisation.md`: what has been removed or excluded for review.
-- `evaluation/`: anonymised TAM/SUS materials and aggregate calculations.
-
-| Layer | Stack |
-|-------|-------|
-| Backend | FastAPI · SQLAlchemy 2 · Pydantic v2 · Python 3.11 |
-| Frontend | Vue 3 (`<script setup>`) · Vite 8 · Vue Router |
-| LLM | Google Gemini (`gemini-2.5-flash` by default) |
-| Storage | PostgreSQL in production, SQLite for local/tests |
-| Auth | Username/password JWT · Google OAuth · GitHub OAuth · guest mode |
-| Deploy | Render API + Postgres · Cloudflare Pages SPA |
+This package contains the implementation, structured knowledge base, prompt
+templates, setup instructions, and anonymised evaluation materials for the
+HealthAI Ethics Assistant described in the paper.
 
 ---
 
-## Architecture
+## Table of Contents
+
+- [Overview](#overview)
+- [Repository Contents](#repository-contents)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Expected Reviewer Checks](#expected-reviewer-checks)
+- [Evaluation Materials](#evaluation-materials)
+- [Paper Alignment](#paper-alignment)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
+---
+
+## Overview
+
+HealthAI Ethics Assistant is a full-stack web application that supports
+healthcare AI requirements work through a structured
+**Create-Validate-Compare** workflow.
+
+**What this artifact provides:**
+
+1. A FastAPI backend implementing authentication, chat sessions, grounded LLM
+   calls, requirement preferences, and DOCX export.
+2. A Vue 3 frontend implementing the practitioner-facing workflow, persona
+   selection, requirement cards, clickable regulatory references, and Developer
+   Mode document grounding.
+3. A structured knowledge base covering EU AI Act entries, NIST AI RMF controls,
+   and practitioner findings across privacy, safety, bias, transparency, and
+   accountability.
+4. Prompt templates for the Create, Validate, and Compare modes.
+5. Anonymised/aggregate TAM and SUS evaluation materials corresponding to the
+   results reported in the paper.
+
+The package intentionally excludes real environment files, API keys, OAuth
+secrets, deployment tokens, raw participant records, raw chat logs, recordings,
+and transcripts.
+
+---
+
+## Repository Contents
 
 ```text
-┌──────────────────────────────────────────────────────────┐
-│                    Vue 3 Frontend                        │
-│ EthicsAssistantView · ChatSidebar · NewChatModal         │
-│ DevPanel · Create/Validate/Compare cards · DOCX preview  │
-└──────────────────────────┬───────────────────────────────┘
-                           │ HTTPS (Axios + JWT)
-┌──────────────────────────▼───────────────────────────────┐
-│                    FastAPI Backend                       │
-│ /auth · /ethics · /chat · /health · /health/db           │
-│ services/ethics_service.py ──► Gemini API                │
-│ services/docx_service.py    ──► DOCX export              │
-│ data/kb.py loads frameworks + practitioner findings      │
-└──────────────────────────┬───────────────────────────────┘
-                           │
-                ┌──────────▼──────────┐
-                │ PostgreSQL / SQLite │
-                │ users               │
-                │ chat_sessions       │
-                │ chat_messages       │
-                │ chat_requirement_preferences │
-                └─────────────────────┘
+.
+├── backend/                 FastAPI backend
+│   ├── app/
+│   │   ├── routers/         /auth, /ethics, /chat endpoints
+│   │   ├── services/        LLM orchestration and DOCX export
+│   │   └── data/            Runtime framework and findings JSON
+│   ├── tests/               Backend tests
+│   ├── requirements.txt
+│   └── .env.example
+├── frontend/                Vue 3 + Vite frontend
+│   ├── src/components/      Chat UI, cards, persona modal, Developer Mode
+│   ├── src/views/
+│   ├── package.json
+│   └── .env.example
+├── knowledge_base/          Reviewer-facing knowledge-base files
+├── prompts/                 Create, Validate, Compare prompt templates
+├── evaluation/              TAM/SUS questionnaire and aggregate results
+├── Docs/                    Setup, anonymisation, deployment, alignment notes
+└── README.md
 ```
+
+Key alignment file:
+
+```text
+Docs/paper_alignment.md
+```
+
+This maps paper claims to concrete files in the artifact.
 
 ---
 
-## Quick Start
+## Requirements
 
-### Prerequisites
+- **Python:** 3.11
+- **Node.js:** 20 or higher
+- **Package managers:** `pip`, `npm`
+- **Storage:** Less than 100 MB after dependency installation, excluding
+  virtual environments and `node_modules`
+- **Network:** Required only for dependency installation and live Gemini calls
+- **LLM key:** Google Gemini API key for live Create/Validate/Compare responses
 
-- Python 3.11
-- Node.js 20+
-- A Google Gemini API key from <https://aistudio.google.com/apikey>
+Reviewers can inspect the code, knowledge base, prompt templates, tests, and
+evaluation files without a Gemini key. A key is only needed to run live LLM
+generation.
+
+---
+
+## Installation
 
 ### Backend
 
@@ -75,10 +111,12 @@ cd backend
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
 cp .env.example .env
+```
 
-# Then edit .env as needed. A minimal local configuration is:
+Edit `backend/.env` and set at least:
+
+```env
 DATABASE_URL=sqlite:///./app.db
 GEMINI_API_KEY=your_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
@@ -86,276 +124,267 @@ SECRET_KEY=change_me
 CORS_ORIGINS=["http://localhost:5173"]
 BACKEND_URL=http://localhost:8000
 FRONTEND_URL=http://localhost:5173
+```
 
+Run the backend:
+
+```bash
 uvicorn app.main:app --reload --port 8000
 ```
 
-API docs are available at <http://localhost:8000/docs>. Tables are created on
-startup for development. Lightweight forward migrations are included for
-session context columns; production should still prefer proper Alembic
-migrations for long-term maintenance.
+Backend API docs are available at:
+
+```text
+http://localhost:8000/docs
+```
 
 ### Frontend
+
+In a second terminal:
 
 ```bash
 cd frontend
 npm install
+cp .env.example .env
 npm run dev
 ```
 
-The frontend runs at <http://localhost:5173>. If `VITE_API_BASE_URL` is unset,
-it defaults to `http://localhost:8000`.
+Open:
 
-### Tests And Checks
+```text
+http://localhost:5173
+```
+
+---
+
+## Configuration
+
+### Backend Environment Variables
+
+| Variable | Local value | Purpose |
+|---|---|---|
+| `DATABASE_URL` | `sqlite:///./app.db` | Local SQLite database |
+| `GEMINI_API_KEY` | `your_api_key_here` | Google Gemini API key |
+| `GEMINI_MODEL` | `gemini-2.5-flash` | Default LLM model |
+| `SECRET_KEY` | `change_me` | JWT signing secret for local review |
+| `CORS_ORIGINS` | `["http://localhost:5173"]` | Allowed frontend origins |
+| `BACKEND_URL` | `http://localhost:8000` | Backend base URL |
+| `FRONTEND_URL` | `http://localhost:5173` | Frontend base URL |
+
+OAuth variables are optional for local review. Guest mode and username/password
+auth can be used without Google or GitHub OAuth credentials.
+
+### Frontend Environment Variables
+
+| Variable | Local value | Purpose |
+|---|---|---|
+| `VITE_API_BASE_URL` | `http://localhost:8000` | Backend API URL |
+
+---
+
+## Usage
+
+### Basic Workflow
+
+1. Start the backend and frontend using the commands above.
+2. Open `http://localhost:5173`.
+3. Continue as guest or create a local account.
+4. Click **New Chat**.
+5. Select the HealthAI Ethics topic.
+6. Choose a persona:
+   - Healthcare Professional
+   - Software Engineer
+   - Healthcare Researcher
+   - Let System Decide, which uses a 20-question mixed-persona questionnaire
+7. Try one of the three workflow modes:
+   - **Create:** ask for ethical requirements for a healthcare AI scenario.
+   - **Validate:** provide an existing requirement and ask whether it is
+     compliant or complete.
+   - **Compare:** provide a draft requirement and ask how it compares with
+     practitioner concerns.
+
+The backend classifies free-form messages through:
+
+```text
+POST /ethics/chat
+```
+
+### Example Prompts
+
+Create:
+
+```text
+We are building a CT-scan triage AI. What privacy and safety requirements should we consider?
+```
+
+Validate:
+
+```text
+Validate this requirement: The system shall log all AI triage recommendations and clinician overrides.
+```
+
+Compare:
+
+```text
+Compare this requirement with real-world practitioner concerns: The model shall explain why each patient was prioritised.
+```
+
+### Developer Mode Document Grounding
+
+Developer Mode includes a lightweight document-grounding workspace. Reviewers
+can upload `.md`, `.txt`, or `.json` reference documents. Their content is
+prepended to the LLM prompt as additional context. This is intentionally
+lightweight prompt grounding, not a vector-search RAG pipeline.
+
+---
+
+## Expected Reviewer Checks
+
+### Run Backend Tests
 
 ```bash
-cd backend && source venv/bin/activate
+cd backend
+source venv/bin/activate
 python -m pytest -q
+```
 
-cd ../frontend
+Expected result:
+
+```text
+6 passed
+```
+
+### Build Frontend
+
+```bash
+cd frontend
 npm run build
 ```
 
----
-
-## Repository Layout
+Expected result:
 
 ```text
-.
-├── backend/
-│   ├── app/
-│   │   ├── main.py              # FastAPI app, CORS, health endpoints
-│   │   ├── config.py            # pydantic-settings
-│   │   ├── database.py          # SQLAlchemy engine/session
-│   │   ├── models.py            # User, sessions, messages, requirement preferences
-│   │   ├── schemas.py           # Pydantic request/response models
-│   │   ├── data/
-│   │   │   ├── kb.py
-│   │   │   ├── frameworks.json
-│   │   │   └── triangulation_findings.json
-│   │   ├── routers/
-│   │   │   ├── auth.py          # /auth
-│   │   │   ├── ethics.py        # /ethics create/validate/compare/chat
-│   │   │   └── chat.py          # /chat sessions, preferences, DOCX export
-│   │   └── services/
-│   │       ├── ethics_service.py
-│   │       ├── llm_service.py
-│   │       └── docx_service.py
-│   ├── scripts/
-│   ├── tests/
-│   ├── requirements.txt
-│   └── runtime.txt
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api/index.js
-│   │   ├── router/index.js
-│   │   ├── views/
-│   │   │   ├── EthicsAssistantView.vue
-│   │   │   ├── LoginView.vue
-│   │   │   └── OAuthCallback.vue
-│   │   ├── utils/guestSessions.js
-│   │   └── components/
-│   │       ├── ChatSidebar.vue · ChatMessage.vue
-│   │       ├── NewChatModal.vue · DevPanel.vue
-│   │       ├── GuidelineRefBadge.vue
-│   │       └── cards/{Create,Validate,Compare}Card.vue
-│   └── vite.config.js
-│
-├── Docs/
-│   ├── artifact_description.md
-│   ├── setup.md
-│   └── anonymisation.md
-├── evaluation/
-├── knowledge_base/
-├── prompts/
-├── render.yaml
-└── README.md
+✓ built
+```
+
+### Inspect Knowledge Base
+
+The reviewer-facing knowledge base is in:
+
+```text
+knowledge_base/
+├── eu_ai_act.json
+├── nist_ai_rmf.json
+├── frameworks.json
+└── findings.json
+```
+
+The runtime copies used by the backend are:
+
+```text
+backend/app/data/frameworks.json
+backend/app/data/triangulation_findings.json
 ```
 
 ---
 
-## Main Features
+## Evaluation Materials
 
-### Topic-Aware Chat Sessions
+Evaluation files are in:
 
-Each chat has its own session-level context:
-
-- selected topic and optional topic prompt
-- selected persona or inferred mixed persona
-- optional project/system context
-- saved conversation messages
-- accepted/rejected/suppressed requirement preferences
-
-Logged-in sessions are stored in the backend database. Guest sessions are kept
-in browser `sessionStorage` for the current tab.
-
-### Persona Selection
-
-Users can choose a fixed persona:
-
-- Healthcare Professional
-- Software Engineer
-- Healthcare Researcher
-
-Or choose **Let System Decide**, which runs a 20-question questionnaire. The
-frontend computes a mixed persona from weighted HCP/SEng/HCR scores and passes a
-compact JSON persona description to the backend as prompt context. Mixed
-personas are displayed with a generic user icon in the chat list.
-
-### Create / Validate / Compare
-
-- **Create** generates ethical concerns and implementable requirements.
-- **Validate** checks an existing requirement against topic-specific guidance or
-  the built-in HealthAI knowledge base.
-- **Compare** compares a draft requirement with practitioner findings or
-  practical topic-specific concerns, then proposes an enhanced requirement.
-
-The backend auto-classifies free-form prompts into one of these modes through
-`/ethics/chat`.
-
-### Clickable Regulation References
-
-Guideline reference pills such as `EU AI Act · Art. 10 (Data Governance)` are
-clickable. The UI opens a regulation detail modal with:
-
-- article/control title
-- summary and implementation detail
-- applicable ethical dimensions
-- source document link
-
-The built-in framework data lives in `backend/app/data/frameworks.json`.
-
-### Requirement Preferences
-
-Each generated requirement can be marked:
-
-- **Accept**: include it in the curated requirements set.
-- **Reject**: record that the user does not want this requirement.
-- **Clear from this chat**: suppress similar requirements in future Create
-  responses for this chat.
-
-For logged-in users, preferences are stored in
-`chat_requirement_preferences`. For guests, they are stored in `sessionStorage`.
-Suppressed requirements are injected into the prompt as per-chat preferences.
-This is a prompt-level suppression mechanism, not yet embedding-based semantic
-deduplication.
-
-### Requirements Document Export
-
-The `Generate Requirements Doc` button opens a preview modal before download.
-The preview and downloaded `.docx` include:
-
-- a link back to the chat (`?session=<id>`)
-- the full first user prompt for that chat
-- topic, persona and project context
-- accepted requirements grouped by dimension
-- guideline references
-
-The DOCX builder is dependency-free and implemented in
-`backend/app/services/docx_service.py`.
-
-### Developer Mode
-
-Developer Mode is available to logged-in users and is stored in
-`localStorage('dev_mode')`. It includes:
-
-- Prompt Inspector
-- Raw Gemini response viewer
-- Model/temperature/max-token overrides
-- RAG Workspace
-- Citation Audit
-- Eval Harness
-
-The RAG Workspace is currently **manual reference-document injection**:
-uploaded `.md`, `.txt` and `.json` files are stored in browser localStorage and
-prepended to LLM user content as `USER REFERENCE DOCS`. It does not yet use
-embeddings, vector search or reranking.
-
-### Auth
-
-- Username/password login with JWT in `localStorage('access_token')`
-- Google OAuth
-- GitHub OAuth
-- Guest mode without login
-
----
-
-## Important API Surfaces
-
-| Endpoint | Purpose |
-|----------|---------|
-| `POST /ethics/chat` | Auto-classify prompt and dispatch to Create/Validate/Compare |
-| `GET /ethics/frameworks` | Built-in framework KB |
-| `GET /ethics/findings` | Practitioner findings |
-| `POST /chat/sessions` | Create logged-in chat session |
-| `GET /chat/sessions` | List logged-in chat sessions |
-| `PATCH /chat/sessions/{id}` | Edit session title/topic/topic prompt |
-| `GET /chat/sessions/{id}/requirements` | List requirement preferences |
-| `POST /chat/sessions/{id}/requirements` | Accept/reject/suppress a requirement |
-| `GET /chat/sessions/{id}/requirements-doc-preview` | JSON preview for export modal |
-| `GET /chat/sessions/{id}/requirements-doc` | Download accepted requirements as DOCX |
-
----
-
-## Environment Variables
-
-See [Docs/environment.md](Docs/environment.md) for the full reference.
-
-Minimum production variables:
-
-| Where | Variable |
-|-------|----------|
-| Render backend | `DATABASE_URL`, `SECRET_KEY`, `GEMINI_API_KEY`, `GEMINI_MODEL`, `BACKEND_URL`, `FRONTEND_URL`, `CORS_ORIGINS`, OAuth client IDs/secrets |
-| Cloudflare Pages frontend | `VITE_API_BASE_URL` |
-
----
-
-## Deployment
-
-Deployment-specific services can be configured after review if needed.
-
-```bash
-cd backend && source venv/bin/activate && python -m pytest -q
-cd ../frontend && npm run build
-cd .. && git push origin main
+```text
+evaluation/
+├── tam_sus_questionnaire.md
+├── anonymised_results.csv
+└── sus_calculation.csv
 ```
 
-Production health checks:
+These files include the anonymised/aggregate TAM and SUS values reported in the
+paper. Raw participant identifiers, raw survey forms, recordings, transcripts,
+and raw chat logs are excluded for anonymisation and ethics reasons.
 
-```bash
-BASE=https://your-backend.example
-curl "$BASE/health"
-curl "$BASE/health/db"
+Reported paper values represented in this package include:
+
+- SUS total score: 60
+- TAM Q10, "Traceable references increased trust": 5
+- TAM Table 2 values for Q1, Q2, Q4-Q8, Q10 and Q11
+
+---
+
+## Paper Alignment
+
+For a claim-by-claim mapping from the paper to artifact files, see:
+
+```text
+Docs/paper_alignment.md
 ```
 
-Deployment notes live in [Docs/deployment.md](Docs/deployment.md).
+Examples:
+
+| Paper claim | Artifact evidence |
+|---|---|
+| Create-Validate-Compare workflow | `backend/app/services/ethics_service.py`, `frontend/src/components/cards/` |
+| Auto-classification via `/ethics/chat` | `backend/app/routers/ethics.py` |
+| EU AI Act and NIST AI RMF as structured JSON | `knowledge_base/eu_ai_act.json`, `knowledge_base/nist_ai_rmf.json` |
+| Practitioner findings in five ethical dimensions | `knowledge_base/findings.json` |
+| DOCX export for accepted requirements | `backend/app/services/docx_service.py` |
 
 ---
 
 ## Troubleshooting
 
-- Backend/API issues: [Docs/troubleshooting-backend.md](Docs/troubleshooting-backend.md)
-- Database connectivity: [Docs/troubleshooting-database.md](Docs/troubleshooting-database.md)
+### Backend cannot start
 
----
+Check that dependencies are installed and the virtual environment is active:
 
-## Research Context
+```bash
+cd backend
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
 
-This project supports the thesis methodology by operationalising a
-triangulation workflow:
+### `GEMINI_API_KEY` error
 
-1. regulatory and framework guidance from EU AI Act and NIST AI RMF
-2. real-world practitioner findings
-3. LLM-assisted requirements engineering with explicit prompt grounding,
-   persona adaptation and user curation
+Live LLM calls require a valid Gemini API key in `backend/.env`:
 
-The current RAG capability is lightweight prompt grounding. A full production
-RAG pipeline would add document ingestion, chunking, embeddings, vector search,
-reranking and source-level citation management.
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Without a valid key, the code and tests can still be inspected, but live
+generation will fail.
+
+### CORS error in browser
+
+Ensure `backend/.env` contains:
+
+```env
+CORS_ORIGINS=["http://localhost:5173"]
+```
+
+Then restart the backend.
+
+### Frontend cannot reach backend
+
+Ensure `frontend/.env` contains:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+Then restart `npm run dev`.
+
+### Different LLM output than paper screenshots
+
+This is expected. Live Gemini responses may vary over time. The reproducible
+parts of this package are the implementation, workflow structure, knowledge
+base, prompt templates, and anonymised evaluation materials.
 
 ---
 
 ## License
 
-Academic research artifact for anonymous peer review.
+This artifact is provided for academic peer review and research replication.
+No real secrets, raw participant records, raw chat logs, or deployment
+credentials are included.
